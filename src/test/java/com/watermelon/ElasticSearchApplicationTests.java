@@ -2,6 +2,7 @@ package com.watermelon;
 
 import com.alibaba.fastjson.JSON;
 import com.watermelon.entity.User;
+import com.watermelon.util.HtmlParseUtil;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -56,7 +57,7 @@ class ElasticSearchApplicationTests {
     @Test
     void createIndex() throws IOException {
         //索引名称为test_index
-        CreateIndexRequest request = new CreateIndexRequest("test_index");
+        CreateIndexRequest request = new CreateIndexRequest("student");
         CreateIndexResponse response = client.indices().create(request, RequestOptions.DEFAULT);
         System.out.println(response);
     }
@@ -67,7 +68,7 @@ class ElasticSearchApplicationTests {
      */
     @Test
     void getIndex() throws IOException {
-        SearchRequest request = new SearchRequest("test_index");
+        SearchRequest request = new SearchRequest("test1");
         SearchResponse response = client.search(request,RequestOptions.DEFAULT);
         //获取索引，并将索引内的数据读取出来
         System.out.println("索引内doc：");
@@ -234,10 +235,11 @@ class ElasticSearchApplicationTests {
     }
 
     @Test
-    void contextLoads() {
-        Random random = new Random();
-        int a = random.nextInt(3)+1;
-        System.out.println(a);
+    void contextLoads() throws IOException {
+//        Random random = new Random();
+//        int a = random.nextInt(3)+1;
+//        System.out.println(a);
+        HtmlParseUtil.parse();
     }
 
 }
